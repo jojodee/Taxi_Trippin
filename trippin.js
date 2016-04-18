@@ -1,6 +1,6 @@
-module.exports = function(capeTownTaxis){
+module.exports = function(tripsData){
   var trips = 0;
-capeTownTaxis.forEach(function(obj){
+tripsData.forEach(function(obj){
 trips += (obj.Trips);
  });
 return trips;
