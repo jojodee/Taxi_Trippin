@@ -3,5 +3,6 @@ module.exports = function(tripsData){
 tripsData.forEach(function(obj){
 trips += (obj.Trips);
  });
+ console.log(trips);
 return trips;
 }

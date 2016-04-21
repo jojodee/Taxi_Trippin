@@ -2,6 +2,7 @@
 var trippin = require('../trippin');
 var minimumTrips = require('../minimumTrips');
 var recForCa123565 = require('../recForCA 123 456.js')
+var tripsNum = require('../tripsNum');
  var assert = require('assert');
 
 
@@ -58,9 +59,8 @@ describe('taxi plates records', function(){
       {
     "RegistrationNumber": "CA 123 456",
     "Route": "Cape Town - Bellville",
-    "Fare": 13,
-    "Trips": 9
-  },
+    "Fare": 13,"Trips": 9
+},
   {
     "RegistrationNumber": "CA 123 456",
     "Route": "Cape Town - Gugulethu",
@@ -73,3 +73,9 @@ describe('taxi plates records', function(){
     assert.deepEqual(results,myres);
   });
 })
+describe('Data on the number of trips', function(){
+  it('should return the total trips by a specific vehicle',function(){
+    var results = tripsNum(capeTownTaxis,"CA 234 567");
+    assert.equal(results,  11);
+  });
+});
