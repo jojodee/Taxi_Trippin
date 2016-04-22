@@ -98,8 +98,8 @@ describe('taxi earnings', function() {
 });
 describe('earnings data', function() {
   it('should return  total earnings by each taxi', function() {
-    var eachTaxiEarnings = "CA 123 456 = 249, CA 234 567 = 132, CA 345 678 = 234";
-    var result = totalEarningsPerTaxi(capeTownTaxis, taxiEarnings);
+    var eachTaxiEarnings = {"CA 123 456": 249,"CA 234 567": 132,"CA 345 678": 234};
+    var result = totalEarningsPerTaxi(capeTownTaxis);
     assert.deepEqual(result, eachTaxiEarnings);
-  })
-})
+  });
+});
