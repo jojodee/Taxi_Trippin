@@ -1,11 +1,13 @@
 var trippin = require('../trippin');
 var minimumTrips = require('../minimumTrips');
-var recForCa123565 = require('../recForCA 123 456.js');
+var records= require('../records.js');
 var tripsNum = require('../tripsNum');
 var routeNames = require('../routeNames');;
 var totalEarnings = require('../totalEarnings');
 var totalEarningsPerTaxi = require('../totalEarningsPerTaxi');
 var totTripsDur = require('../totTripsDur');
+var durbLowTrips = require('../durbLowTrips');
+
 var assert = require('assert');
 
 
@@ -129,7 +131,7 @@ describe('taxi plates records', function() {
     ];
 
 
-    var results = recForCa123565(capeTownTaxis, "CA 123 456");
+    var results = records(capeTownTaxis, "CA 123 456");
     assert.deepEqual(results, myres);
   });
 })
@@ -168,5 +170,56 @@ describe('durban data', function(){
   it('return total trips by Durban taxis', function(){
     var result = totTripsDur(durbanTaxis);
     assert.equal(result, 117);
+  });
+});
+describe('durban trips data', function(){
+  it('should return lowest trips', function(){
+    var result = durbLowTrips(durbanTaxis);
+    assert.equal(result,9)
+  });
+});
+describe('registrations', function(){
+  it('should return records for a specific taxi',function(){
+    var taxiRecords = [{
+    "RegistrationNumber": "ND 123 456",
+    "Route": "Durban - University of KZN",
+    "Fare": 7,
+    "Trips": 14
+  },
+  {
+    "RegistrationNumber": "ND 123 456",
+    "Route": "Durban - Umbilo",
+    "Fare": 8,
+    "Trips": 15
+  }];
+    var results = records(durbanTaxis, 'ND 123 456');
+    assert.deepEqual(results,taxiRecords)
+  });
+});
+describe("No of trips", function(){
+  it("should give the no of trips taken by a specific taxi",function(){
+    var results = tripsNum(durbanTaxis,'ND 234 567');
+    assert.deepEqual(results,36);
+  });
+});
+describe('routes data', function(){
+  it('should return routes taken by a specific taxi', function(){
+    var taxiRou = ["Durban - Umbilo", "Durban - University of KZN", "Durban - Umlazi Station"];
+    var results = routeNames(durbanTaxis, 'ND 345 678');
+    assert.deepEqual(results, taxiRou);
+  });
+
+});
+describe('earnings data', function(){
+  it('should return earnings of a specific taxi', function(){
+    var results = totalEarnings(durbanTaxis, 'ND 234 567');
+    assert.deepEqual(results, 387);
+  });
+});
+describe('earnings per taxi', function(){
+  it('should give the total earnings for each taxi', function(){
+    var eachTaxi = {"ND 123 456": 218,"ND 234 567": 387,"ND 345 678": 518};
+    var results = totalEarningsPerTaxi(durbanTaxis);
+    assert.deepEqual(results, eachTaxi)
   });
 });
